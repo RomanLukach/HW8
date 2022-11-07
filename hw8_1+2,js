@@ -1,0 +1,84 @@
+// Домашнее задание 8.1  (40 баллов) / Срок сдачи задания - до 09.11
+// 1. Необходимо создать функцию, содержащую расчет суммы затрат, данных в массиве -
+// в расчет берутся суммы только выше 1000.
+// 2. Создать тестовую функцию, которая будет проверять, что расчет суммы затрат
+// производится верно.
+// 3. Проверить расчет на тестовых объектах (используйте forEach()):
+
+let expenses = [
+    { expenses: [2500, 6000, 7000, 6000, 3, 9, 700, 8000, 655, 5700, 340, 5390] },
+    { expenses: [500, 1000, 90000, 80, 980, 9000, 10, 400, 3000, 250, 45000, 1200] },
+    { expenses: [20, 200, 8900, 3300, 2300, 1009, 1200, 2000, 670, 900, 900, 7000]},
+];
+let threshold = 1000;
+
+
+expensesCalcAboveThreshold1 (expenses, threshold)
+expensesCalcAboveThreshold2 (expenses, threshold)
+testExpensesCalcAboveThreshold (expenses, threshold)
+
+// ------------ Calc function (version #1) -------------------
+function expensesCalcAboveThreshold1 (expenses, upperLimit) {
+for (let year of expenses) {
+    let eachExpenses = year.expenses.length;
+    let sumYearFiltered = 0;
+
+    for (let i = 0; i < eachExpenses; i++) {
+        if (year.expenses[i] > threshold) {
+            sumYearFiltered += year.expenses[i];
+        }
+// Домашнее задание 8.2 / Срок сдачи задания - до 09.11
+// В массиве из предыдущего задания выведите название месяцев в которых затраты меньше либо равны 1000 - 
+// используйте для этого объект Date.
+        if (year.expenses[i] < threshold) {
+            let months = new Date(`${i + 1}`).toString().split(" ").slice(1, -7);
+            console.log(months + " " + "and expenses " + year.expenses[i]);
+        }
+    }
+    console.log(`Сумма затрат = ${sumYearFiltered}`); 
+    console.log('---------------------------------------')
+}
+}
+
+// ------------ Calc function (version #2) -------------------
+function expensesCalcAboveThreshold2 (expenses, threshold) {
+expenses.forEach(function(year) {
+    let eachExpenses = year.expenses.length;
+    let sumYearFiltered = 0;
+
+    for (let i = 0; i < eachExpenses; i++) {
+        if (year.expenses[i] > threshold) {
+            sumYearFiltered += year.expenses[i];
+        }
+    }
+    console.log(`Сумма затрат = ${sumYearFiltered}`); 
+    console.log('---------------------------------------')
+})
+}
+
+// ------------ Test function -------------------
+function testExpensesCalcAboveThreshold (expenses, upperLimit) {
+for (let year of expenses) {
+    let eachExpenses = year.expenses.length;
+    let sumYear = 0;
+    let sumYearBelowThreshold = 0;
+    let sumYearAboveThreshold = 0;
+    
+    for (let i = 0; i < eachExpenses; i++) {
+// Calculate total amount of all expenses during a year
+        sumYear += year.expenses[i];
+// Calculate all expenses below or equal to upperLimit
+        if (year.expenses[i] <= threshold) {
+            sumYearBelowThreshold += year.expenses[i];
+        }
+// Calculate all expenses above upperLimit
+        if (year.expenses[i] > threshold) {
+            sumYearAboveThreshold += year.expenses[i];
+        }
+// To verify total amount of all expenses per year is equal to sum of expenses below and above threshold  
+        if (sumYear = (sumYearBelowThreshold + sumYearAboveThreshold)) {
+        }
+    } 
+    console.log ('Сумма затрат и сумма расходов совпадает')
+}
+}
